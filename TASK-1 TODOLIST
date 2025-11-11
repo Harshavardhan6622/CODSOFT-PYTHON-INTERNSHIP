@@ -1,0 +1,53 @@
+tasks = []
+
+def show_tasks():
+    if not tasks:
+        print("No tasks yet.")
+    else:
+        for i, (task, done) in enumerate(tasks, 1):
+            status = "✓" if done else " "
+            print(f"{i}. [{status}] {task}")
+
+def add_task():
+    task = input("Enter task: ").strip()
+    if task:
+        tasks.append((task, False))
+        print("Task added.")
+
+def mark_done():
+    show_tasks()
+    if tasks:
+        try:
+            n = int(input("Enter task number to mark done: "))
+            t, _ = tasks[n - 1]
+            tasks[n - 1] = (t, True)
+            print("Task marked as done.")
+        except:
+            print("Invalid number.")
+
+def remove_task():
+    show_tasks()
+    if tasks:
+        try:
+            n = int(input("Enter task number to remove: "))
+            tasks.pop(n - 1)
+            print("Task removed.")
+        except:
+            print("Invalid number.")
+
+while True:
+    print("\n1. View Tasks\n2. Add Task\n3. Mark Task Done\n4. Remove Task\n5. Exit")
+    ch = input("Choose: ").strip()
+    if ch == "1":
+        show_tasks()
+    elif ch == "2":
+        add_task()
+    elif ch == "3":
+        mark_done()
+    elif ch == "4":
+        remove_task()
+    elif ch == "5":
+        print("Goodbye!")
+        break
+    else:
+        print("Invalid choice.")
